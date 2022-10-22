@@ -26,8 +26,8 @@ jobs:
         run: ls -la project
       - name: Clearn s3 app location
         run: aws s3 rm s3://folautech-lambda-container/aws-lambda-with-github-action --recursive
-      - name: Package app
+      - name: Package app and push to s3
         id: packageApp
         run: sam package --use-json --force-upload --s3-bucket folautech-lambda-container --s3-prefix aws-lambda-with-github-action --region us-west-2
-      - name: Deploy
+      - name: Deploy artifact from s3 to lambda
         run: python deploy.py
