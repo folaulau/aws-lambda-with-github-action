@@ -29,6 +29,8 @@ jobs:
         #run: echo "aws_s3_resp=$(sam package --use-json --s3-bucket folautech-lambda-container --s3-prefix aws-lambda-with-github-action --region us-west-2)" >> $GITHUB_OUTPUT
       - run: echo "aws_s3_resp={\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}" >> $GITHUB_OUTPUT
       - name: List out project
-        run: ls -la
+        run: | 
+        cd project
+        ls -la
       - name: Display package response
         run: echo ${{ needs.build-deploy.outputs.output1 }}
