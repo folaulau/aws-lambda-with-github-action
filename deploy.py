@@ -19,7 +19,7 @@ s3_iterator = s3_paginator.paginate(Bucket='folautech-lambda-container',Prefix='
 
 latest_key = ''
 
-for key_data in s3_iterator.search():
+for key_data in s3_iterator.search(''):
     latest_key = key_data
 
 print("latest_key: {}".format(latest_key))
