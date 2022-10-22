@@ -24,7 +24,7 @@ jobs:
       #   run: sam build --use-container
       - name: Package app
         id: packageApp
-        run: sam package --use-json --force-upload --s3-key project.zip --s3-bucket folautech-lambda-container --s3-prefix aws-lambda-with-github-action --region us-west-2
+        run: sam package --use-json --force-upload --s3-bucket folautech-lambda-container --s3-prefix aws-lambda-with-github-action/project.zip --region us-west-2
         #echo "aws_s3_resp={\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}" >> $GITHUB_OUTPUT
         #run: echo "aws_s3_resp=$(sam package --use-json --s3-bucket folautech-lambda-container --s3-prefix aws-lambda-with-github-action --region us-west-2)" >> $GITHUB_OUTPUT
       - run: echo "aws_s3_resp={\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}" >> $GITHUB_OUTPUT
