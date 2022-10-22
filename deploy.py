@@ -19,7 +19,7 @@ print("s3_response: {}".format(s3_response))
 
 latest_key = ''
 
-for key_data in s3_response['content']:
+for key_data in s3_response['Contents']:
     print("key_data: {}".format(key_data))
     latest_key = key_data['Key']
 
