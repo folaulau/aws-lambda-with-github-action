@@ -22,11 +22,12 @@ filtered_iterator = s3_iterator.search(
     "Contents[?to_string(LastModified)>='\"2022-10-22 08:05:37+00:00\"'].Key"
 )
 
+print("filtered_iterator: {}".format(filtered_iterator))
+
 latest_key = ''
 
 for key_data in filtered_iterator:
     print(key_data)
-    print("value:{}".format(filtered_iterator[key_data]))
     latest_key = key_data
 
 print("latest_key: {}".format(latest_key))
