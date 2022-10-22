@@ -2,6 +2,8 @@ import boto3
 
 
 """
+This script pulls the most recent released artifact from s3 and deploy it to aws lambda
+
 Every time there's a deploy, there's only one object in s3 since all objects are deleted before package command is run.
 So s3_iterator.search will return 1 object
 """
@@ -15,7 +17,7 @@ s3_response = s3_client.list_objects_v2(
     Prefix='aws-lambda-with-github-action'
 )
 
-print("s3_response: {}".format(s3_response))
+# print("s3_response: {}".format(s3_response))
 
 latest_key = ''
 
