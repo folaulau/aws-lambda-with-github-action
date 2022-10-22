@@ -4,7 +4,7 @@ on:
       - main
 
 jobs:
-  build-app:
+  build-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -23,47 +23,11 @@ jobs:
       - name: Build app
         run: sam build --use-container --cached
       - name: List out project
-        run: ls -la
-  
-  push-artifact-to-s3:
-    needs: build-app
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-        with:
-          python-version: '3.10'
-      - name: install
-        run: |
-          pip install boto3 requests pyjwt
-      - uses: aws-actions/setup-sam@v1
-      - uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-west-2
+        run: ls -la project
       - name: Clearn s3 app location
         run: aws s3 rm s3://folautech-lambda-container/aws-lambda-with-github-action --recursive
       - name: Package app
         id: packageApp
         run: sam package --use-json --force-upload --s3-bucket folautech-lambda-container --s3-prefix aws-lambda-with-github-action --region us-west-2
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: push-artifact-to-s3
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-        with:
-          python-version: '3.10'
-      - name: install
-        run: |
-          pip install boto3 requests pyjwt
-      - uses: aws-actions/setup-sam@v1
-      - uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-west-2
       - name: Deploy
         run: python deploy.py
