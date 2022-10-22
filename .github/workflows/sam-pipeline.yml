@@ -6,7 +6,7 @@ jobs:
   build-deploy:
     runs-on: ubuntu-latest
     outputs:
-      output1: ${{ steps.package-app.outputs.awsresp }}
+      output1: ${{ steps.package-app.outputs }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
@@ -17,10 +17,12 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-west-2
       # sam build 
-      - run: sam build --use-container
-      - name: package app
+      - name: Build app
+        run: sam build --use-container
+      - name: Package app
         id: package-app
-        run: echo "awsresp={sam package --use-json --s3-bucket folautech-lambda-container --s3-prefix aws-lambda-with-github-action --region us-west-2}" >> $GITHUB_OUTPUT 
-      - run: ls -la
-      - name: display package response
+        run: sam package --use-json --s3-bucket folautech-lambda-container --s3-prefix aws-lambda-with-github-action --region us-west-2
+      - name: List out project
+        run: ls -la
+      - name: Display package response
         run: echo ${{ needs.build-deploy.outputs.output1 }}
