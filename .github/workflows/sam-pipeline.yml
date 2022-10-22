@@ -19,4 +19,4 @@ jobs:
 # Run Unit tests- Specify unit tests here 
 
 # sam deploy
-      - run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --stack-name sam-hello-world --s3-bucket folautech-lambda-container --capabilities CAPABILITY_IAM --region us-west-2 
+      - run: sam deploy --no-confirm-changeset --force-upload --no-fail-on-empty-changeset --stack-name aws-lanbda-with-github-action --s3-bucket folautech-lambda-container --s3-prefix aws-lanbda-with-github-action --capabilities CAPABILITY_IAM --region us-west-2 
