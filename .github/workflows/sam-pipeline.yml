@@ -24,7 +24,7 @@ jobs:
       #   run: sam build --use-container
       - name: Package app
         id: package-app
-        run: sam package --use-json --force-upload --s3-bucket folautech-lambda-container --s3-prefix aws-lambda-with-github-action --region us-west-2 -t template_aws.yml
+        run: sam package --use-json --force-upload --s3-bucket folautech-lambda-container --s3-prefix aws-lambda-with-github-action --region us-west-2 -t template_aws.yaml
         #run: echo "aws_s3_resp=$(sam package --use-json --s3-bucket folautech-lambda-container --s3-prefix aws-lambda-with-github-action --region us-west-2)" >> $GITHUB_OUTPUT
       - name: List out project
         run: ls -la
