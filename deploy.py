@@ -36,7 +36,7 @@ print("latest_key: {}".format(latest_key))
 lambda_update_response = client.update_function_code(
     FunctionName='aws-lambda-with-github-action',
     S3Bucket='folautech-lambda-container',
-    S3Key='aws-lambda-with-github-action',
+    S3Key=latest_key,
 )
 
 print("lambda_update_response: {}".format(lambda_update_response))
