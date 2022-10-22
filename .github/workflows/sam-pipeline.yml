@@ -22,7 +22,9 @@ jobs:
       #   run: sam build --use-container
       - name: Package app
         id: package-app
-        run: sam package --use-json --s3-bucket folautech-lambda-container --s3-prefix aws-lambda-with-github-action --region us-west-2 >> $aws_s3_response
+        run: | 
+        aws_s3_resp=$(sam package --use-json --s3-bucket folautech-lambda-container --s3-prefix aws-lambda-with-github-action --region us-west-2) 
+        echo "aws_s3_response=$aws_s3_resp" >> $GITHUB_ENV
       - name: List out project
         run: ls -la
       - name: Display package response
