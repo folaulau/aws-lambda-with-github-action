@@ -9,6 +9,7 @@ import datetime
 #     print(obj.key)
 
 s3 = boto3.client("s3")
+client = boto3.client('lambda')
 
 s3_paginator = s3.get_paginator('list_objects_v2')
 s3_iterator = s3_paginator.paginate(Bucket='folautech-lambda-container',Prefix='aws-lambda-with-github-action',
@@ -32,18 +33,10 @@ for key_data in filtered_iterator:
 
 print("latest_key: {}".format(latest_key))
 
+lambda_update_response = client.update_function_code(
+    FunctionName='aws-lambda-with-github-action',
+    S3Bucket='folautech-lambda-container',
+    S3Key='aws-lambda-with-github-action',
+)
 
-# response = client.update_function_code(
-#     FunctionName='string',
-#     ZipFile=b'bytes',
-#     S3Bucket='string',
-#     S3Key='string',
-#     S3ObjectVersion='string',
-#     ImageUri='string',
-#     Publish=True|False,
-#     DryRun=True|False,
-#     RevisionId='string',
-#     Architectures=[
-#         'x86_64'|'arm64',
-#     ]
-# )
+print("lambda_update_response: {}".format(lambda_update_response))
