@@ -16,5 +16,9 @@ jobs:
           aws-region: us-west-2
       # sam build 
       - run: sam build --use-container
-      - run: sam package --use-json --s3-bucket folautech-lambda-container --s3-prefix aws-lambda-with-github-action --region us-west-2
+      - name: Package app
+        id: pack
+        run: sam package --use-json --s3-bucket folautech-lambda-container --s3-prefix aws-lambda-with-github-action --region us-west-2
       - run: ls -la
+      - name: display package response
+        run: echo ${{ steps.pack.outputs.response }}
