@@ -16,6 +16,7 @@ jobs:
           aws-region: us-west-2
       # sam build 
       - run: sam build --use-container
+      - run: ls -la
 # Run Unit tests- Specify unit tests here 
 
 # sam deploy
