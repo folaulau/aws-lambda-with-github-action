@@ -6,8 +6,6 @@ on:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
-    outputs:
-      output1: ${{ steps.packageApp.outputs.aws_s3_resp }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
@@ -26,18 +24,16 @@ jobs:
         run: sam build --use-container
       - name: List out project
         run: ls -la
+      - name: Clearn s3 app location
+        run: aws s3 rm s3://folautech-lambda-container/aws-lambda-with-github-action --recursive
       - name: Package app
         id: packageApp
         run: sam package --use-json --force-upload --s3-bucket folautech-lambda-container --s3-prefix aws-lambda-with-github-action --region us-west-2
-        #echo "aws_s3_resp={\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}" >> $GITHUB_OUTPUT
-        #run: echo "aws_s3_resp=$(sam package --use-json --s3-bucket folautech-lambda-container --s3-prefix aws-lambda-with-github-action --region us-west-2)" >> $GITHUB_OUTPUT
-      - name: List out app
-        run: ls -la
-      - name: List out project
-        run: ls -la project
-      - name: Get s3 latest deploy
-        run: aws s3 ls s3://folautech-lambda-container/aws-lambda-with-github-action --recursive
-      # - name: Update lamdba with latest code
-      #   run: aws lambda update-function-code --function-name aws-lambda-with-github-action --s3-bucket folautech-lambda-container --s3-key aws-lambda-with-github-action/84478d7a1c641092db92792ef2514d36
+      # - name: List out app
+      #   run: ls -la
+      # - name: List out project
+      #   run: ls -la project
+      # - name: Get s3 latest deploy
+      #   run: aws s3 ls s3://folautech-lambda-container/aws-lambda-with-github-action --recursive
       - name: Deploy
         run: python deploy.py
