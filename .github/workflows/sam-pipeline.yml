@@ -7,7 +7,7 @@ jobs:
   build-deploy:
     runs-on: ubuntu-latest
     outputs:
-      output1: ${{ steps.package-app.outputs.aws_s3_resp }}
+      output1: ${{ steps.packageApp.outputs.aws_s3_resp }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
@@ -23,7 +23,7 @@ jobs:
       # - name: Build app
       #   run: sam build --use-container
       - name: Package app
-        id: package-app
+        id: packageApp
         run: sam package --use-json --force-upload --s3-bucket folautech-lambda-container --s3-prefix aws-lambda-with-github-action --region us-west-2
         #echo "aws_s3_resp={\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}" >> $GITHUB_OUTPUT
         #run: echo "aws_s3_resp=$(sam package --use-json --s3-bucket folautech-lambda-container --s3-prefix aws-lambda-with-github-action --region us-west-2)" >> $GITHUB_OUTPUT
@@ -33,4 +33,4 @@ jobs:
       - name: List out project
         run: ls -la project
       - name: Display package response
-        run: echo ${{ steps.package-app.outputs }}
+        run: echo ${{ steps.packageApp.outputs }}
