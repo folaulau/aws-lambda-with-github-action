@@ -4,7 +4,7 @@ on:
       - main
 
 jobs:
-  build-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -29,11 +29,9 @@ jobs:
       - name: Package app
         id: packageApp
         run: sam package --use-json --force-upload --s3-bucket folautech-lambda-container --s3-prefix aws-lambda-with-github-action --region us-west-2
-      # - name: List out app
-      #   run: ls -la
-      # - name: List out project
-      #   run: ls -la project
-      # - name: Get s3 latest deploy
-      #   run: aws s3 ls s3://folautech-lambda-container/aws-lambda-with-github-action --recursive
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy
         run: python deploy.py
