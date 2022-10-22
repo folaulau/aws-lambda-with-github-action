@@ -1,12 +1,12 @@
 import boto3
 import datetime
-s3 = boto3.resource('s3')
-bucket = s3.Bucket('folautech-lambda-container')
+# s3 = boto3.resource('s3')
+# bucket = s3.Bucket('folautech-lambda-container')
 
-bucket.objects.filter
+# bucket.objects.filter
 
-for obj in bucket.objects.all():
-    print(obj.key)
+# for obj in bucket.objects.all():
+#     print(obj.key)
 
 s3 = boto3.client("s3")
 
