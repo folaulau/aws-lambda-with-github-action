@@ -6,21 +6,22 @@ Every time there's a deploy, there's only one object in s3 since all objects are
 So s3_iterator.search will return 1 object
 """
 
-s3 = boto3.client("s3")
-client = boto3.client('lambda')
+s3_client = boto3.client("s3")
+lambda_client = boto3.client('lambda')
 
-s3_paginator = s3.get_paginator('list_objects_v2')
-s3_iterator = s3_paginator.paginate(Bucket='folautech-lambda-container',Prefix='aws-lambda-with-github-action',
-                    PaginationConfig={
-                        'MaxItems': 10,
-                        'PageSize': 10
-                    }
-            )
+s3_response = s3_client.list_objects_v2(
+    Bucket='folautech-lambda-container',
+    MaxKeys=10,
+    Prefix='aws-lambda-with-github-action'
+)
+
+print("s3_response: {}".format(s3_response))
 
 latest_key = ''
 
-for key_data in s3_iterator.search(''):
-    latest_key = key_data
+for key_data in s3_response['content']:
+    print("key_data: {}".format(key_data))
+    latest_key = key_data['Key']
 
 print("latest_key: {}".format(latest_key))
 
