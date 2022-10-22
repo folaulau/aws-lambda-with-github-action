@@ -16,8 +16,5 @@ jobs:
           aws-region: us-west-2
       # sam build 
       - run: sam build --use-container
+      - run: sam package --use-json --s3-bucket folautech-lambda-container --s3-prefix aws-lambda-with-github-action --region us-west-2
       - run: ls -la
-# Run Unit tests- Specify unit tests here 
-
-# sam deploy
-      - run: sam deploy --no-confirm-changeset --force-upload --no-fail-on-empty-changeset --stack-name aws-lambda-with-github-action --s3-bucket folautech-lambda-container --s3-prefix aws-lambda-with-github-action --capabilities CAPABILITY_IAM --region us-west-2 
