@@ -5,6 +5,8 @@ on:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.package-app.output }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
@@ -16,9 +18,8 @@ jobs:
           aws-region: us-west-2
       # sam build 
       - run: sam build --use-container
-      - name: Package app
-        id: pack
-        run: sam package --use-json --s3-bucket folautech-lambda-container --s3-prefix aws-lambda-with-github-action --region us-west-2
+      - id: package-app
+        run: echo "sam package --use-json --s3-bucket folautech-lambda-container --s3-prefix aws-lambda-with-github-action --region us-west-2" >> $GITHUB_OUTPUT
       - run: ls -la
       - name: display package response
-        run: echo ${{ steps.pack.outputs.response }}
+        run: echo ${{ jobs.outputs.output1 }}
