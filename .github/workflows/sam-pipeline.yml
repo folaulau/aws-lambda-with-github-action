@@ -31,4 +31,4 @@ jobs:
       - name: List out project
         run: ls -la
       - name: Display package response
-        run: echo ${{ outputs.output1 }}
+        run: echo ${{ needs.build-deploy.outputs.output1 }}
