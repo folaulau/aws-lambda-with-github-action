@@ -14,5 +14,26 @@ filtered_iterator = s3_iterator.search(
     "Contents[?to_string(LastModified)>='\"2022-10-22 08:05:37+00:00\"'].Key"
 )
 
+latest_key = ''
+
 for key_data in filtered_iterator:
     print(key_data)
+    latest_key = key_data
+
+print("latest_key: {}".format(latest_key))
+
+
+# response = client.update_function_code(
+#     FunctionName='string',
+#     ZipFile=b'bytes',
+#     S3Bucket='string',
+#     S3Key='string',
+#     S3ObjectVersion='string',
+#     ImageUri='string',
+#     Publish=True|False,
+#     DryRun=True|False,
+#     RevisionId='string',
+#     Architectures=[
+#         'x86_64'|'arm64',
+#     ]
+# )
