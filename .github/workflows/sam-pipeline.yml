@@ -24,7 +24,7 @@ jobs:
       #   run: sam build --use-container
       - name: Package app
         id: package-app
-        run: 
+        run: | 
         resp=$(sam package --use-json --force-upload --s3-bucket folautech-lambda-container --s3-prefix aws-lambda-with-github-action --region us-west-2)
         echo "response"
         echo $resp
