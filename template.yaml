@@ -14,7 +14,8 @@ Resources:
   HelloWorldFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: project
+      CodeUri: s3://folautech-lambda-container/aws-lambda-with-github-action/project.zip
+      PackageType: Zip
       Handler: app.lambda_handler
       Runtime: python3.9
       Architectures:
