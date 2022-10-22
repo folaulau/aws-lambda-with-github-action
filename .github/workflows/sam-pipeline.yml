@@ -33,4 +33,4 @@ jobs:
       - name: List out project
         run: ls -la project
       - name: Display package response
-        run: echo ${{ steps.package-app.outputs.Resources.HelloWorldFunction }}
+        run: echo ${{ steps.package-app.outputs }}
