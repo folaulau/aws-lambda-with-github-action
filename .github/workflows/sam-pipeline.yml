@@ -33,4 +33,4 @@ jobs:
       - name: List out project
         run: ls -la project
       - name: Display package response
-        run: echo ${{ fromJson(steps.packageApp.outputs).AWSTemplateFormatVersion }}
+        run: echo ${{ fromJson(steps.packageApp.outputs) }}
