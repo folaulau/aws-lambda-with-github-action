@@ -25,7 +25,7 @@ for key_data in s3_response['Contents']:
 
 print("latest_key: {}".format(latest_key))
 
-lambda_update_response = client.update_function_code(
+lambda_update_response = lambda_client.update_function_code(
     FunctionName='aws-lambda-with-github-action',
     S3Bucket='folautech-lambda-container',
     S3Key=latest_key,
