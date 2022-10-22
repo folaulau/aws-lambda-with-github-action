@@ -32,5 +32,7 @@ jobs:
         run: ls -la
       - name: List out project
         run: ls -la project
+      - name: Get s3 latest deploy
+        run: aws s3 ls s3://folautech-lambda-container/aws-lambda-with-github-action
       - name: Update lamdba with latest code
         run: aws lambda update-function-code --function-name aws-lambda-with-github-action --s3-bucket folautech-lambda-container --s3-key aws-lambda-with-github-action/84478d7a1c641092db92792ef2514d36
