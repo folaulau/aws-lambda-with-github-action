@@ -1,5 +1,10 @@
 import boto3
-import datetime
+
+
+"""
+Every time there's a deploy, there's only one object in s3 since all objects are deleted before package command is run.
+So s3_iterator.search will return 1 object
+"""
 
 s3 = boto3.client("s3")
 client = boto3.client('lambda')
