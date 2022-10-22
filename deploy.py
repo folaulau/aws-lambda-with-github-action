@@ -1,12 +1,5 @@
 import boto3
 import datetime
-# s3 = boto3.resource('s3')
-# bucket = s3.Bucket('folautech-lambda-container')
-
-# bucket.objects.filter
-
-# for obj in bucket.objects.all():
-#     print(obj.key)
 
 s3 = boto3.client("s3")
 client = boto3.client('lambda')
@@ -19,16 +12,9 @@ s3_iterator = s3_paginator.paginate(Bucket='folautech-lambda-container',Prefix='
                     }
             )
 
-filtered_iterator = s3_iterator.search(
-    "Contents[?to_string(LastModified)>='\"2022-10-22 08:05:37+00:00\"'].Key"
-)
-
-print("filtered_iterator: {}".format(filtered_iterator))
-
 latest_key = ''
 
-for key_data in filtered_iterator:
-    print(key_data)
+for key_data in s3_iterator.search():
     latest_key = key_data
 
 print("latest_key: {}".format(latest_key))
