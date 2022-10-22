@@ -28,4 +28,4 @@ jobs:
       - name: List out project
         run: ls -la
       - name: Display package response
-        run: echo ${{ aws_s3_response }}
+        run: echo ${{ env.aws_s3_response }}
